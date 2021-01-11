@@ -1,0 +1,1181 @@
+/*==========================
+|   |    |login
+==========================*/
+html,
+body {
+    height: 100%;
+
+}
+
+/*backgroung img*/
+#login {
+    height: auto;
+    width: auto;
+    background: url("../img/pre-login/banner-with-overlay.jpg") no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 100%;
+
+}
+
+.container {
+
+    position: relative;
+
+    margin-top: 20px;
+    max-width: 460px;
+    max-height: 700px;
+    height: 100%;
+    padding: 30px;
+    background-color: #fff;
+
+    border-radius: 3px;
+    margin-bottom: 500px;
+}
+
+#logo img {
+    margin-top: 150px;
+}
+
+#btn-login {
+    color: #6255a5;
+}
+
+.login-content h2 {
+    margin-top: 0;
+    color: #6255a5;
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+
+
+}
+
+.login-content p {
+    margin-top: 10px;
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+}
+
+#email label {
+    margin-top: 35px;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+
+.input-field {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+    border: 1px solid #6255a5;
+   width: 400px;
+    height: 35px;
+    border-radius: 3px;
+ 
+}
+
+#password label {
+    margin-top: 20px;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+.input-field {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+    border: 1px solid #6255a5;
+   width: 400px;
+    height: 35px;
+    border-radius: 3px;
+    margin-top: -10px;
+
+
+}
+
+#FP a {
+    float: right;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #6255a5;
+    position: absolute;
+ margin-left: 270px;
+    margin-top: -25px;
+    font-weight: 500;
+}
+
+.field-icon {
+    float: right;
+
+    position: absolute;
+    right: 30px;
+/*    left: 0;*/
+    z-index: 2;
+     margin-top: -25px;
+    color: #8a8a8a;
+}
+
+#exampleCheck1 {
+    margin-top: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #d1d1d1;
+   margin-bottom: 40px;
+}
+
+
+.form-check-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    position: absolute;
+bottom: -3px;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+}
+
+#btn-login {
+    background-color: #6255a5;
+    width: 400px;
+    height: 40px;
+    border-radius: 3px;
+    font-family: "Open Sans";
+    font-size: 18px;
+    line-height: 22px;
+    color: #fff;
+    text-align: center;
+    border: none;
+    padding-top: 6px;
+
+    margin-top: -20px;
+}
+#btn-login  span {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+#acc {
+    margin-top: 20px;
+
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+#SU {
+    color: #6255a5;
+}
+@media only screen and (max-width: 480px) {
+    .input-field {
+        width: 300px;
+        height: 35px;
+        
+    }
+    #FP a {
+        margin-left: 100px;
+        
+    }
+    .field-icon {
+        float: left;
+    }
+}
+/*==========================
+|   |    |forget
+==========================*/
+
+.fp h2 {
+    margin-top: -5px;
+    color: #6255a5;
+    font-family: "Open Sans";
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 38px;
+
+    
+}
+.fp p {
+    margin-top: -5px;
+    margin-bottom: 0;
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+}
+#logo-fp  img {
+    margin-top: 150px;
+}
+
+
+
+/*==========================
+|   |    |navigation bar
+==========================*/
+.navbar {
+    padding: 15px 0 10px 0;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+    color: #fff;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.8);
+}
+
+.site-nav-wrapper {
+    padding: 0 120px;
+}
+
+.navbar-brand {
+    padding: 13px 15px;
+}
+ul.navbar-nav > li > a {
+    font-family: "Open Sans", sans-serif;
+    color: #333333;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+ .dropdown span {
+    font-family: "Open Sans", sans-serif;
+    color: #333333;
+    font-size: 17px;
+    font-weight: 700;
+    position: absolute;
+     top: -30px;
+     right: 0;
+     
+    
+}
+#profile1 {
+    width: 40px;
+    margin-top: -20px;
+    
+}
+
+#btn-logout {
+    background-color: #6255a5;
+    color: #fff;
+    border-radius: 3px;
+    margin-right: -40px;
+    margin-top: -5px;
+    font-weight: 600;
+    width: 100px;
+    margin-left: 10px;
+   
+   
+}
+/*White Navigation*/
+.white-nav-top {
+    background: #fff;
+    padding: 10px 0;
+    -webkit-box-shadow: 0 8px 6px -9px #999;
+    box-shadow: 0 8px 6px -9px #999;
+    z-index: 2;
+}
+
+.white-nav-top ul.navbar-nav > li > a {
+    color: #212226;
+}
+
+
+
+
+
+
+
+/*footer*/
+.container-ft {
+    padding-left: 160px;
+    font-family: "Open Sans";
+   
+}
+.container-ft  p {
+    float: right;
+}
+/*Dashboard page*/
+.dropdown2 {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0,0.2);
+    z-index: 1;
+    height: 150px;
+    transform: translateX(-80%);
+    
+}
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+}
+.dropdown-content2 a:hover {
+    background-color: #ddd;
+}
+.dropdown2:hover .dropdown-content2 {display: block;}
+
+
+/*spam dropdown*/
+.dropdown4 {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content4 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0,0.2);
+    z-index: 1;
+    height: 50px;
+    transform: translateX(-80%);
+    
+}
+.dropdown-content4 a {
+    color: black;
+    padding: 6px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+}
+.dropdown4 span {
+   font-family: "Open Sans", sans-serif;
+    color: #333333;
+    font-size: 17px;
+    font-weight: 700;
+    position: absolute;
+    top: -30px;
+    right: -60px;
+  
+    
+}
+.dropdown4 span:hover {
+    color: #6255a5;
+    text-decoration: underline;
+}
+.dropdown4:hover .dropdown-content4 {display: block;}
+
+.container-ds {
+    padding: 2% 8%;
+    border-top: 1px solid #d1d1d1;
+}
+.container-ds h1 {
+     font-family: "Open Sans";
+    font-size: 250%;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+   margin-top: 1%;
+    margin-bottom: 2%;
+    
+    
+}
+.container-ds h4 {
+    font-family: "Open Sans";
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+}
+.container-ds p {
+   font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px; 
+    color: #333333; 
+}
+
+.earning-detail,
+.number-detail,
+.num-detail  {
+    border: 1px solid #d1d1d1;
+    
+   height: 151px;
+    width: 450px;
+    padding-top: 30px;
+    margin-bottom: 40px;
+}
+.month-dd {
+ width: 190px;
+    height: 50px;
+    border-radius: 3px;
+    color: #8a8a8a;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px; 
+    float: right;
+}
+.title-section .button-search {
+    float: right;
+    
+    
+}
+
+#button-search {
+    background-color:  #6255a5;
+    width: 130px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+   
+    
+}
+#place-search {
+    width: 350px;
+    height: 50px;
+    border: 1px solid #d1d1d1;
+    font-family: "FontAwesome" ,"Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+
+
+
+
+
+
+/*table*/
+.progressn table {
+    width: 100%;
+   height: 444px;
+    border: 1px solid #d1d1d1;
+    border-collapse: separate;
+    border-radius: 3px; 
+   
+
+}
+
+ .progressn .title-section {
+   margin-bottom: 30px;
+}
+
+
+.title-section h2 {
+   font-family: "Open Sans";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5; 
+    margin-top: 10px;
+}
+
+
+.progressn .table1 {
+ font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    font-weight: 400;
+
+}
+/*pagination*/
+.pagination .page-link {
+border: none;
+     font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333; 
+    margin-right: 10px;
+}
+ .pagination .arrow01{
+    width: 8px;
+    height: 15px;
+    color: #333333;
+     font-size: 20px;
+     margin-right: 20px;
+     
+}
+.pagination .arrow02 {
+   width: 8px;
+    height: 15px;
+    color: #333333;
+     font-size: 20px;
+      margin-left: 10px; 
+}
+.pagination .page-item01 {
+    width: 34px;
+    height: 34px;
+    background-color: #6255a5;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    border-radius: 30px;
+    
+}
+
+/*my profile page*/
+.container-mp {
+    padding: 0px 130px;
+}
+#btn-submit {
+  background-color:  #6255a5;
+    width: 130px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;  
+}
+.mp03 {
+ background: url("../img/Add-notes/upload-file.png") no-repeat ;
+    
+    background-position: center;
+    text-align: center;
+    
+}
+.container-mp h1 {
+    color: #6255a5;
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;  
+    margin-bottom: 20px;
+}
+.container-mp .mp01 {
+    color: #333333;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px; 
+}
+.container-mp .mp02 {
+     
+    border: 1px solid #d1d1d1;
+    width: 670px;
+    height: 50px;
+    border-radius: 3px;
+     font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 22px;
+    font-weight: 400;
+}
+.container-mp .mp04 {
+    border: 1px solid #d1d1d1;
+    width: 440px;
+    height: 50px;
+    border-radius: 3px;
+     font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 22px;
+    font-weight: 400;
+}
+ .container-mp .mp05 {
+    border: 1px solid #d1d1d1;
+    width: 190px;
+    height: 50px;
+    border-radius: 3px;
+     font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 22px;
+    font-weight: 400;
+}
+#button-add-admin {
+  background-color:  #6255a5;
+    width: 270px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;  
+}
+.btn-search {
+    float: right;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+/*manage category*/
+#button-add-category {
+     background-color:  #6255a5;
+    width: 200px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px; 
+}
+/*add category*/
+.ac {
+   border: 1px solid #d1d1d1;
+    width: 670px;
+    
+    border-radius: 3px;
+     font-family: "Open Sans";
+    font-size: 16px;
+    color: #8a8a8a;
+    line-height: 22px;
+    font-weight: 400; 
+}
+/*managetype*/
+#button-add-type {
+    background-color:  #6255a5;
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;  
+}
+/*==========================
+|   |    |notes details
+==========================*/
+.container17 {
+    padding: 40px 130px 60px 130px; 
+}
+.container17 h4 {
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #6255a5;
+    margin-bottom: 20px;
+}
+.container17 img {
+    height: 300px;
+    width: 240px;
+    margin-right: 40px;
+}
+.container17 h3 {
+    font-family: "Open Sans";
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+    margin-bottom: 15px;
+}
+.container17 h5 {
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #333333;
+    margin-bottom: 20px;
+    
+}
+.container17 p {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+.para1 {
+    padding-right: 70px;
+}
+#btn-DWLD-15{
+    color: #fff;
+    width: 204px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #6255a5;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: "Open Sans";
+    font-weight: 600;
+    
+}
+ul.list-group li{
+    display:flex;
+     font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+    color: #333333;
+    
+}
+ul.right li {
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #6255a5;
+    list-style: none;
+   
+    text-align: right;
+}
+.ndimg img {
+    width: 50px;
+    height: 50px;
+   flex: none;
+    position: relative;
+    bottom: -30px;
+    left: 30px;
+    
+}
+.container-nd {
+   width: 811px;
+    height: 510px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    padding: 20px;
+    
+}
+.container-nd h5 {
+    font-family: "Open Sans";
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #333333;
+    margin-bottom: 0;
+}
+.container-nd p {
+     font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+.img-delete {
+    float: right;
+}
+/*Tganks popup*/
+.modal-top-space {
+   padding-top: 130px;
+    
+}
+.modal-body {
+    padding: 50px 55px 30px 40px;
+    
+}
+.modal-img img {
+margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+.modal-body h4{
+     font-family: "Open Sans";
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #6255a5;
+    margin-bottom: 30px;
+}
+.modal-body  p{
+     font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+.modal-body  p span{
+     font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #333333;
+}
+
+/*star*/
+.star1 {
+    color: #f4c613;
+}
+.stars {
+    font-size: 18px;
+}
+.stars >span {
+    margin-left: 12px;
+}
+
+/*pdf*/
+
+/*
+   general styles
+*/
+.center-block-horiz {
+   margin-left: auto !important;
+   margin-right: auto !important;
+ }
+.set-margin-cicis-menu-to-go {
+  margin: 20px;
+}
+.set-padding-cicis-menu-to-go {
+  padding: 20px;
+}
+.set-border-cicis-menu-to-go {
+   border: 1px inset #d1d1d1;
+}
+set-box-shadow-cicis-menu-to-go {
+  -webkit-box-shadow: 4px 4px 14px #4f4f4f;
+     -moz-box-shadow: 4px 4px 14px #4f4f4f;
+          box-shadow: 4px 4px 14px #4f4f4f;
+}
+  
+/*
+** Style the iframe
+** =========================
+*/
+/*
+    css commmon to all iframes
+*/
+.responsive-wrapper {
+  position: relative;
+  height: 0;    /* gets height from padding-bottom */
+  overflow: hidden;
+  /* put following styles (necessary for overflow and 
+     scrolling handling) inline in .embed-responsive-element-wrapper around iframe because not stable in CSS
+    -webkit-overflow-scrolling: touch; 
+                      overflow: auto; */
+}
+.responsive-wrapper img,
+.responsive-wrapper object,
+.responsive-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+   
+  border-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*
+    css particular to this iframe
+*/
+
+#Iframe-Cicis-Menu-To-Go {
+  max-width: 666.67px;
+  max-height: 600px;
+  overflow: hidden;
+}
+/*
+   padding-bottom = h/w as %
+*/
+.responsive-wrapper-padding-bottom-90pct {
+  padding-bottom: 90%;
+}
+/*member*/
+.dropdown5 {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content5 {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0,0.2);
+    z-index: 1;
+    height: 100px;
+    transform: translateX(-100%);
+    
+}
+.dropdown-content5 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    
+}
+.dropdown-content5 a:hover {
+    background-color: #ddd;
+}
+.dropdown5:hover .dropdown-content5 {display: block;}
+
+/*member detail*/
+
+.container-md {
+    padding: 20px 130px;
+}
+.container-md h1 {
+   font-family: "Open Sans";
+    font-size: 34px;
+    color: #6255a5;
+    line-height: 32px;
+    font-weight: 600; 
+    margin-bottom: 30px;
+}
+.container-md h3 {
+   font-family: "Open Sans";
+    font-size: 24px;
+    color: #6255a5;
+    line-height: 32px;
+    font-weight: 600; 
+    margin-bottom: 10px;
+}
+
+.container-md ul.member > li {
+   font-family: "Open Sans";
+    font-size: 17px;
+    color: #333333;
+    line-height: 32px;
+    font-weight: 500;
+   list-style: none;
+    margin-left: -10px;
+    
+}
+.container-md  ul.member1 > li {
+    font-family: "Open Sans";
+    font-size: 17px;
+    color: #6255a5;
+    line-height: 32px;
+    font-weight: 600;
+   border-right: 1px solid #d1d1d1;
+    margin-left: -20px;
+    list-style: none;
+    
+}
+.container-md ul.member2 > li {
+   font-family: "Open Sans";
+    font-size: 17px;
+    color: #333333;
+    line-height: 32px;
+    font-weight: 500;
+   list-style: none;
+   margin-left: -40px;
+    
+}
+.container-md  ul.member3 > li {
+    font-family: "Open Sans";
+    font-size: 17px;
+    color: #6255a5;
+    line-height: 32px;
+    font-weight: 600;
+  margin-left: -10px;
+   
+    list-style: none;
+    
+}
+/*notes under review*/
+.seller {
+   width: 174px;
+    height: 50px;
+    border-radius: 3px;
+    color: #333333;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px; 
+    border: 1px solid #d1d1d1;
+    margin-bottom: -10px;
+    
+}
+#sell {
+   font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    font-weight: 400; 
+}
+#button-red {
+     width: 112px;
+    height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px; 
+    background-color: #28a745;
+    border: none;
+}
+#button-green {
+     width: 112px;
+    height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px; 
+    background-color: #ff3636;
+    border: none;
+    
+}
+#button-blue {
+     width: 112px;
+    height: 40px;
+    border-radius: 3px;
+    color: #fff;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px; 
+    background-color: #cccccc;
+    border: none;
+}
+
+/* download*/
+.seller {
+    width: 200px;
+    height: 50px;
+    border-radius: 3px;
+    color: #8a8a8a;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px; 
+   
+}
+.note {
+    width: 210px;
+    height: 50px;
+    border-radius: 3px;
+    color: #8a8a8a;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px; 
+   margin-left: -20px;
+}
+.buyer {
+    width: 200px;
+    height: 50px;
+    border-radius: 3px;
+    color: #333333;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px; 
+   margin-left: -30px;
+}
+.mydownloads table {
+    width: 100%;
+    height: 700px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    
+}
+ .mydownloads .title-section {
+   margin-bottom: 30px;
+}
+ .mydownloads .table2 {
+ font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    font-weight: 400;
+
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0,0.2);
+    z-index: 1;
+    height: 170px;
+    
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    
+}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.dropdown span:hover {
+    
+    color: #6255a5;
+    text-decoration: underline;
+}
+.dropdown:hover .dropdown-content {display: block;}
+.star-img {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    margin-right: 30px;
+    margin-bottom: 60px;
+    
+}
+star-head {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    
+}
+.review-label {
+    font-family: "Open Sans";
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    font-weight: 400;
+    
+}
+.btn-review {
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #6255a5;
+    font-family: "Open Sans";
+    line-height: 22px;
+    font-size: 18px;
+    margin-top: 30px;
+}
+.common-table-width{
+    width: 1150px;
+}
+.common-table-width-2{
+    width: 1170px;
+}
+.common-table-width-3{
+    width: 1150px;
+}

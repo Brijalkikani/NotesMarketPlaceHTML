@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+    <!--title-->
+    
+     <title>Notes Marketplace</title>
+    <!--Favicon-->
+    <link rel="shortcut icon" href="img/home/favicon.ico">
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
+     <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-tabs/responsive.css">
+
+</head>
+
+<body>
+    <section id="login">
+        <!--logo-->
+        <div id="logo-su" class="text-center">
+            <img src="img/pre-login/top-logo.png" alt="logo">
+        </div>
+        <!--sign up-->
+        <div class="container">
+
+            <div class="cp text-center">
+                <h2>Create an Account</h2>
+                <p>Enter your details to signup</p>
+            </div>
+            <!--form-->
+            <form>
+               <div class="signup">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1" id="fn">First name<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="fname" placeholder=" Enter your first name"required>
+                        
+
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1" id="ln">Last Name<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="lname" placeholder=" Enter your last name"required>
+                        
+
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+
+                         <label for="exampleInputPassword1" id="email1">Email<span class="required">*</span></label>
+                        <input type="email" class="form-control" id="email0" aria-describedby="emailHelp" placeholder=" Enter your email address"required>
+                        
+                    </div>
+                </div>
+
+                </div>
+                <div class="sign_up">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1" id="pwd">Password</label>
+                        <input type="password" class="form-control su" id="exampleInputpassword" placeholder=" Enter your password">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+
+                         <label for="exampleInputPassword1" id="cnfmpwd">Confirm Password</label>
+                        <input type="password" class="form-control su" id="exampleInputPasswordcnfm" placeholder="Re enter your password">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span><br><br>
+
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-su"><span>SIGN UP</span></button>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p id="acc">Already have an account?<a id="SU" href="login.html">Login</a></p>
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+    </section>
+
+    <!--jquery-->
+    <script src="js/jquery.min.js.js"></script>
+    <script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+    <!-- Bootstarp JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!--Custom JS-->
+    <script src="js/script.js"></script>
+</body>

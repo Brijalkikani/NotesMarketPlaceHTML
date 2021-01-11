@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+    <!--title-->
+    <title>Notes Marketplace</title>
+    <!--Favicon-->
+    <link rel="shortcut icon" href="img/home/favicon.ico">
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-tabs/responsive.css">
+
+</head>
+
+<body>
+
+    <!--user profile page-->
+
+
+    <header>
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="site-nav-wrapper">
+                    <div class="navbar-header ">
+
+                        <!--mobile menu open button-->
+                        <span id="mobile-nav-open-btn">&#9776;</span>
+                        <!--logo-->
+                        <a href="#" class="navbar-brand smooth-scroll">
+
+
+                            <img src="img/pre-login/purple-logo.png" alt="logo" class="img-responsive">
+                        </a>
+                    </div>
+                    <!--main menu-->
+                    <div class="container01">
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li><a href="#">Search Notes</a></li>
+                                <li><a href="#">Sell Your Notes</a></li>
+                                <li><a href="#">Buyer Requests</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#"><img src="img/front-images/user-img.png" class="img-circle img-responsive" id="profile1"></a></li>
+                                <li><a href="#"><button class="btn btn-primary" type="submit" id="btn-logout">Logout</button></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!--mobile menu-->
+                    <div id="mobile-nav">
+                        <!--mobile menu open button-->
+                        <span id="mobile-nav-close-btn">&times;</span>
+                        <div id="mobile-nav-content">
+                            <ul class="nav">
+
+                                <li><a class="smooth-scroll" href="#home">Search Notes</a></li>
+                                <li><a class="smooth-scroll" href="#about">Sell Your Notes</a></li>
+                                <li><a class="smooth-scroll" href="#team">Buyer Requests</a></li>
+                                <li><a class="smooth-scroll" href="#services">FAQ</a></li>
+                                <li><a class="smooth-scroll" href="#portfolio">Contact Us</a></li>
+                                <li><a class="smooth-scroll" href="#blog"><img src="img/front-images/user-img.png" class="img-circle img-responsive" id="profile1"></a></li>
+                                <li><a class="smooth-scroll" href="#contact"><button class="btn btn-primary" type="submit" id="btn-logout">Logout</button></a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+    <div id="user-profile">
+        <div class="content-box-md">
+            <div class="container02">
+                <div class="row">
+                    <div class="col-md-12 ">
+
+                        <h2>Add Notes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <section id="ad-notes">
+        <div class="container-adnotes">
+            <h2>Basic Note Details</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Title<span class="required">*</span></span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter your notes title" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="category" class="ad01">Category<span class="required">*</span></label>
+                    <select id="Gender" class="form-control ads">
+                        <option value="" disabled selected hidden>Select your category</option>
+                        <option value="type1">..</option>
+                        <option value="type2">..</option>
+                        <option value="type3">other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="ad01">Display Picture</label>
+                    <input type="picture" class="form-control adn" id="pp1" placeholder=" Upload a picture">
+                </div>
+                <div class="col-md-6">
+                    <label class="ad01">Upload Notes<span class="required">*</span></label>
+                    <input type="picture" class="form-control adn" id="pp2" placeholder=" Upload your notes">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="type" class="ad01">Type</label>
+                    <select id="Gender" class="form-control ads">
+                        <option value="" disabled selected hidden>Select your note type</option>
+                        <option value="type1">..</option>
+                        <option value="type2">..</option>
+                        <option value="type3">other</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span> Number of Pages</span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter number of note pages">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <label for="exampleInputPassword1" class="ad01"><span>Description<span class="required">*</span></span></label>
+                    <input type="text" class="form-control ad" placeholder=" Enter your description" required>
+
+
+                </div>
+            </div>
+            <h2>Institution Information</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="gender" class="ad01">Country</label><br>
+                    <select id="Gender" class="form-control ads">
+                        <option value="" disabled selected hidden>Select your country</option>
+
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Institution Name</span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter your institution name">
+                </div>
+            </div>
+            <h2>Course Details</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Course Name</span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter your course name">
+
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Course Code</span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter your course code">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Professor/Lecturer</span></label>
+                    <input type="text" class="form-control ads" placeholder=" Enter your professor name">
+
+                </div>
+            </div>
+            <h2>Selling Information</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <label for="exampleInputPassword1" class="ad02 "><span>Sell For</span><span class="required">*</span></label>
+
+                            </div>
+                            <input type="radio" name="sell" value="Free" class="circle1" aria-label="Radio button for text input"><span> Free</span>
+                            <input type="radio" name="sell" value="paid" class="circle1" id="box2" aria-label="Radio button for text input"><span> Paid</span>
+                        </div>
+
+                    </div>
+                    <div>
+                        <label for="exampleInputPassword1" class="ad01" id="sp"><span>Sell Price</span><span class="required">*</span></label>
+                        <input type="text" class="form-control ads" placeholder=" Enter your price">
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Note Preview</span><span class="required">*</span></label>
+                    <input type="text" class="form-control adn" placeholder=" Upload a file" id="pp1">
+
+                </div>
+
+            </div>
+            <button class="btn btn-primary btn-save" type="submit">SAVE</button>
+            <button class="btn btn-primary btn-save" type="submit">PUBLISH</button>
+
+
+
+
+        </div>
+    </section>
+    <hr>
+    <!--Footer Area-->
+    <footer class="text-left">
+        <div class="container010">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Copyright &copy; Tatvasoft All Rights Reserved.
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <ul class="social-list">
+                        <li><a href="#"><i class="fa fa-facebook "></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--jquery-->
+    <script src="js/jquery.min.js.js"></script>
+    <script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+    <!-- Bootstarp JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!--Custom JS-->
+    <script src="js/script.js"></script>
+</body>

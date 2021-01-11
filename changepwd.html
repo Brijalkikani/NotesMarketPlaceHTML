@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+    <!--title-->
+    <title>Notes Marketplace</title>
+    <!--Favicon-->
+    <link rel="shortcut icon" href="img/home/favicon.ico">
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-tabs/responsive.css">
+
+</head>
+
+<body>
+    <section id="login">
+        <!--logo-->
+        <div id="logo" class="text-center">
+            <img src="img/pre-login/top-logo.png" alt="logo" >
+        </div>
+        <!--login-->
+        <div class="container">
+
+            <div class="cp text-center">
+                <h2>Change password</h2>
+                <p>Enter your new password to change your password</p>
+            </div>
+            <!--form-->
+            <form>
+                <div class="row" id="passwordold">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1">Old Password</label>
+                        <input type="password" class="form-control lo" id="exampleInputPasswordold" placeholder=" Enter your old password">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon f-i toggle-password"></span>
+
+                    </div>
+                </div>
+                <div class="row" id="passwordnew">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1">New Password</label>
+                        <input type="password" class="form-control lo" id="exampleInputPasswordnew" placeholder=" Enter your new password">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon f-i toggle-password"></span>
+
+                    </div>
+                </div>
+                <div class="row" id="passwordconfirm">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" class="form-control lo" id="exampleInputPasswordconfirm" placeholder=" Enter your confirm password">
+                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon f-i toggle-password"></span><br><br>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--<button type="Login" class="btn btn-primary">LOGIN</button>-->
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-login"><span>SUBMIT</span></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <!--jquery-->
+    <script src="js/jquery.min.js.js"></script>
+    <script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+    <!-- Bootstarp JS-->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!--Custom JS-->
+    <script src="js/script.js"></script>
+</body>
