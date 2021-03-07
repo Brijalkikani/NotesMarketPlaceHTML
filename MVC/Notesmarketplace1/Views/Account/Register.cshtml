@@ -1,0 +1,144 @@
+﻿@model Notesmarketplace1.Models.UserRegistration
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+    <!--title-->
+    <title>@ViewBag.Title NotesMarketplace</title>
+    <!--Favicon-->
+    <link href="~/Content/img/front-images/favicon.ico" rel="shortcut icon">
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link href="~/Content/css/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">*@
+    <link href="~/Content/css/responsive-tabs/responsive-tabs.min.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">*@
+    <!--Bootstrap CSS-->
+    <link href="~/Content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">*@
+
+    <!--Custom CSS-->
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/style.css">*@
+    <link href="~/Content/css/responsive-tabs/responsive.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/responsive-tabs/responsive.css">*@
+
+</head>
+
+<body>
+    <section id="login">
+        <!--logo-->
+        <div id="logo-su" class="text-center">
+            <img src="~/Content/img/admin-images/top-logo.png" />
+            @*<img src="img/pre-login/top-logo.png" alt="logo">*@
+        </div>
+        <!--sign up-->
+        <div class="container">
+
+            <div class="cp text-center">
+                <h2>Create an Account</h2>
+                <p>Enter your details to signup</p>
+            </div>
+            <!--form-->
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
+            {
+                <div class="signup">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="fn">First name<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @PlaceHolder = "Enter Your FirstName" })
+                            @*<input type="text" name="FirstName" class="form-control" id="fname" placeholder=" Enter your first name" required>*@
+                            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="ln">Last Name<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control ", @PlaceHolder = "Enter Your LastName" })
+                            @*<input type="text"  class="form-control" id="lname" placeholder=" Enter your last name" required>*@
+                            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="email1">Email<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control ", @PlaceHolder = "Enter Your emailId" })
+                            @*<input type="email" class="form-control" id="email0" aria-describedby="emailHelp" placeholder=" Enter your email address" required>*@
+                            @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("EmailExist",new { @class = "text-denger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="sign_up">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="pwd">Password</label>
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control su", @PlaceHolder = "Enter Your password" })
+                            @*<input type="password" class="form-control su" id="exampleInputpassword" placeholder=" Enter your password">*@
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="cnfmpwd">Confirm Password</label>
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control su", @PlaceHolder = "Enter confirm password" })
+                            @*<input type="password" class="form-control su" id="exampleInputPasswordcnfm" placeholder="Re enter your password">*@
+                            @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span><br><br>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" id="btn-su"><span>SIGN UP</span></button>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p id="acc">Already have an account?<a id="SU">@Html.ActionLink("Login", "Login", "Account", null, new { @class = "page-scroll" })</a></p>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </section>
+
+    <script src="~/Scripts/js/jquery.min.js.js"></script>
+    @*<script src="js/jquery.min.js.js"></script>*@
+    <script src="~/Scripts/js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+    @* <script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script>*@
+    <!-- Bootstarp JS-->
+    <script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>
+    @* <script src="js/bootstrap/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <!--Custom JS-->
+    <script src="~/Scripts/js/script.js"></script>
+    @*<script src="js/script.js"></script>*@
+</body>
+</html>
+

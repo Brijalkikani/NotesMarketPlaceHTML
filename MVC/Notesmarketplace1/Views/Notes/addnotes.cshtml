@@ -1,0 +1,249 @@
+﻿@model Notesmarketplace1.Models.UserSellernotes
+
+@{
+    Layout ="~/Views/Shared/_Layoutcommon.cshtml" ;
+
+         
+
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+    <!--title-->
+    <title>Notes Marketplace</title>
+    <!--Favicon-->
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--Font awesome-->
+    <link href="~/Content/css/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">*@
+    <link href="~/Content/css/responsive-tabs/responsive-tabs.min.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/responsive-tabs/responsive-tabs.min.css">*@
+    <!--Bootstrap CSS-->
+    <link href="~/Content/css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">*@
+
+    <!--Custom CSS-->
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/style.css">*@
+    <link href="~/Content/css/responsive-tabs/responsive.css" rel="stylesheet" />
+    @* <link rel="stylesheet" href="css/responsive-tabs/responsive.css">*@
+    <script>
+        function fileValidation() {
+
+            var fileInput = document.getElementById('DisplayPicture');
+           
+            var filePath = fileInput.value;
+           
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                //alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+                fileInput.value = '';
+                document.getElementById('DisplayPicture-error').innerHTML = "plz select only .png ,.jpg, or .jpeg file only";
+                document.getElementById('DisplayPicture-error').focus;
+                return false;
+            }
+        }
+        
+
+    </script>
+
+
+</head>
+
+<body>
+   
+    <!--user profile page-->
+
+
+    <div id="user-profile">
+        <div class="content-box-md">
+            <div class="container02">
+                <div class="row">
+                    <div class="col-md-12 ">
+
+                        <h2>Add Notes</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <section id="ad-notes">
+        <div class="container-adnotes">
+            @using (Html.BeginForm("addnotes", "Notes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <h2>Basic Note Details</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Title<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control ads", @PlaceHolder = "Enter your notes title" })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger erroemessage error_field" })
+
+                        @*<input type="text" class="form-control ads" placeholder=" Enter your notes title" required>*@
+                    </div>
+                    <div class="col-md-6">
+                        <label for="category" class="ad01">Category<span class="required">*</span></label>
+                        @Html.DropDownList("Category", new SelectList(ViewBag.NoteCategory, "Id", "name"), "Select your category", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger erroemessage error_field" })
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="ad01">Display Picture</label>
+                        <input type="file" name="DisplayPicture" class="form-control adn pp1" id="DisplayPicture" placeholder="Upload a picture" onchange="return fileValidation()" />
+                        <span id="DisplayPicture-error" class="text-danger"></span>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <label class="ad01">Upload Notes<span class="required">*</span></label>
+                        <input type="file" name="UploadNotes" class="form-control adn" id="pp2" placeholder="Upload your notes" accept="application/pdf" multiple />
+                        @Html.ValidationMessageFor(model => model.UploadNotes, "", new { @class = "text-danger erroemessage error_field" })
+                        
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="type" class="ad01">Type</label>
+                        @Html.DropDownList("NoteType", new SelectList(ViewBag.NoteType, "Id", "Name"), "Select your note type", new { @class = "form-control ads", name = "NoteType" })
+
+                        @*<select id="Gender" class="form-control ads">
+                                <option value="" disabled selected hidden>Select your note type</option>
+                                <option value="type1">..</option>
+                                <option value="type2">..</option>
+                                <option value="type3">other</option>
+                                                                                                                                                                                                                                                                                                           </select>*@
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span> Number of Pages</span></label>
+                        @Html.TextBoxFor(x => x.NumberofPages, new { @class = "form-control ads", @PlaceHolder = "Enter number of note pages" })
+                        @*<input type="text" class="form-control ads" placeholder=" Enter number of note pages">*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <label for="exampleInputPassword1" class="ad01"><span>Description<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(x => x.Description, new { @class = "form-control ad", @PlaceHolder = "Enter your description" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger erroemessage error_field" })
+                        @*<input type="text" class="form-control ad" placeholder=" Enter your description" required>*@
+
+
+                    </div>
+                </div>
+                <h2>Institution Information</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="country" class="ad01">Country</label><br>
+                        @Html.DropDownList("Country", new SelectList(ViewBag.Country, "ID", "Name"), "Select your country", new { @class = "form-control ads", name = "Country" })
+                        @*<select id="Gender" class="form-control ads">
+                                <option value="" disabled selected hidden>Select your country</option>
+
+                            </select>*@
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Institution Name</span></label>
+                        @Html.TextBoxFor(x => x.UniversityName, new { @class = "form-control ads", @PlaceHolder = "Enter your institution name" })
+                        @*<input type="text" class="form-control ads" placeholder=" Enter your institution name">*@
+                    </div>
+                </div>
+                <h2>Course Details</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Course Name</span></label>
+                        @Html.TextBoxFor(x => x.Course, new { @class = "form-control ads", @PlaceHolder = "Enter your course name" })
+                        @*<input type="text" class="form-control ads" placeholder=" Enter your course name">*@
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Course Code</span></label>
+                        @Html.TextBoxFor(x => x.CourseCode, new { @class = "form-control ads", @PlaceHolder = "Enter your course code " })
+                        @*<input type="text" class="form-control ads" placeholder=" Enter your course code">*@
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Professor/Lecturer</span></label>
+                        @Html.TextBoxFor(x => x.Professor, new { @class = "form-control ads", @PlaceHolder = "Enter your professor name" })
+                        @*<input type="text" class="form-control ads" placeholder=" Enter your professor name">*@
+
+                    </div>
+                </div>
+                <h2>Selling Information</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <label for="exampleInputPassword1" class="ad02 "><span>Sell For</span><span class="required">*</span></label>
+
+                                </div>
+                                @Html.RadioButtonFor(x => x.IsPaid, "False", new { @class = "circle1", @id="box1" ,@name="IsPaid"})<span> Free</span>
+                                @Html.RadioButtonFor(x => x.IsPaid, "True", new { @class = "circle1", @id = "box2", @name ="IsPaid" })<span> Paid</span>
+                                @Html.ValidationMessageFor(model => model.IsPaid, "", new { @class = "text-danger erroemessage error_field" })
+                                @*<input type="radio" name="sell" value="Free" class="circle1" aria-label="Radio button for text input">*@
+                                @*<input type="radio" name="sell" value="paid" class="circle1" id="box2" aria-label="Radio button for text input">*@
+                            </div>
+
+                        </div>
+                        <div>
+                            <label for="exampleInputPassword1" class="ad01" id="sp"><span>Sell Price</span><span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.SellingPrice, new { @class = "form-control ads" , @id ="sellprice", @PlaceHolder = "Enter your price" })
+                            
+                            @*<input type="text" class="form-control ads" placeholder=" Enter your price">*@
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="exampleInputPassword1" class="ad01"><span>Note Preview</span><span class="required">*</span></label>
+                        @*@Html.TextBoxFor(x => x.NotesPreview, new { @class = "form-control adn" ,@id ="pp1", @PlaceHolder = "Upload a file" })*@
+                       <input type="file" name="NotesPreview" class="form-control adn pp1" placeholder=" Upload a file"  accept="application/pdf">
+                        
+                            @if (@ViewBag.ErrorMessage!=null)
+                            {
+                            <p class="text-danger">@ViewBag.ErrorMessage</p>
+                            }
+                       
+
+                    </div>
+
+                </div>
+                <button class="btn btn-primary btn-save" type="submit">SAVE</button>
+                
+
+
+            }
+        </div>
+    </section>
+    <hr>
+   
+
+    <!--jquery-->
+    <script src="~/Scripts/js/jquery.min.js.js"></script>
+    @*<script src="js/jquery.min.js.js"></script>*@
+    <script src="~/Scripts/js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+    @* <script src="js/responsive-tabs/jquery.responsiveTabs.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <!-- Bootstarp JS-->
+    <script src="~/Scripts/js/bootstrap/bootstrap.min.js"></script>
+    @* <script src="js/bootstrap/bootstrap.min.js"></script>*@
+    <!--Custom JS-->
+    <script src="~/Scripts/js/script.js"></script>
+    @*<script src="js/script.js"></script>*@
+</body>
+</html>
