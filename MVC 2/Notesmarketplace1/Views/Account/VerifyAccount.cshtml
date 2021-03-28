@@ -1,0 +1,23 @@
+﻿@model Notesmarketplace1.Models.UserRegistration
+@{
+    Layout = "~/Views/Shared/_Layoutcommonn.cshtml";
+}
+    <section id="E-V">
+        <!--logo-->
+        <!--login-->
+        <div class="container05">
+            <div id="logo-ev">
+                <img src="/Content/img/pre-login/purple-logo.png" />
+            </div>
+            <div class="ev">
+                <h4>Dear @ViewBag.firstname</h4>
+                <h4>Thanks for Signing up!</h4>
+                <h4>Simply click below for email verification.</h4>
+                 <br><button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-ev"><a href="/Account/Login"><span>VERIFY EMAIL ADDRESS</span></a></button>
+              
+        </div>
+
+        </div>
+    </section>
+
+   

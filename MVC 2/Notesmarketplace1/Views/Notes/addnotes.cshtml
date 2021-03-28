@@ -1,0 +1,151 @@
+﻿@model Notesmarketplace1.Models.UserSellernotes
+
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+
+}
+
+<!--user profile page-->
+<div id="user-profile">
+    <div class="content-box-md">
+        <div class="container02">
+            <div class="row">
+                <div class="col-md-12 ">
+
+                    <h2>Add Notes</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<section id="ad-notes">
+    <div class="container-adnotes">
+        @using (Html.BeginForm("addnotes", "Notes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <h2>Basic Note Details</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="ad01"><span>Title<span class="required">*</span></span></label>
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control ads", @PlaceHolder = "Enter your notes title" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger erroemessage error_field" })
+
+                </div>
+                <div class="col-md-6">
+                    <label for="category" class="ad01">Category<span class="required">*</span></label>
+                    @Html.DropDownList("Category", new SelectList(ViewBag.NoteCategory, "Id", "name"), "Select your category", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger erroemessage error_field" })
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="ad01">Display Picture</label>
+                    <input type="file" name="DisplayPicture" class="form-control adn pp1" id="DisplayPicture" placeholder="Upload a picture" onchange="return fileValidation()" />
+                    <span id="DisplayPicture-error" class="text-danger"></span>
+
+                </div>
+                <div class="col-md-6">
+                    <label class="ad01">Upload Notes<span class="required">*</span></label>
+                    <input type="file" name="UploadNotes" class="form-control adn" id="pp2" placeholder="Upload your notes" accept="application/pdf" multiple />
+                    @Html.ValidationMessageFor(model => model.UploadNotes, "", new { @class = "text-danger erroemessage error_field" })
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="type" class="ad01">Type</label>
+                    @Html.DropDownList("NoteType", new SelectList(ViewBag.NoteType, "Id", "Name"), "Select your note type", new { @class = "form-control ads", name = "NoteType" })
+                   
+</div>
+<div class="col-md-6">
+    <label for="exampleInputPassword1" class="ad01"><span> Number of Pages</span></label>
+    @Html.TextBoxFor(x => x.NumberofPages, new { @class = "form-control ads", @PlaceHolder = "Enter number of note pages" })
+
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <label for="exampleInputPassword1" class="ad01"><span>Description<span class="required">*</span></span></label>
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control ad", @PlaceHolder = "Enter your description" })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger erroemessage error_field" })
+
+    </div>
+</div>
+<h2>Institution Information</h2>
+<div class="row">
+    <div class="col-md-6">
+        <label for="country" class="ad01">Country</label><br>
+        @Html.DropDownList("Country", new SelectList(ViewBag.Country, "ID", "Name"), "Select your country", new { @class = "form-control ads", name = "Country" })
+
+    </div>
+    <div class="col-md-6">
+        <label for="exampleInputPassword1" class="ad01"><span>Institution Name</span></label>
+        @Html.TextBoxFor(x => x.UniversityName, new { @class = "form-control ads", @PlaceHolder = "Enter your institution name" })
+
+    </div>
+</div>
+<h2>Course Details</h2>
+<div class="row">
+    <div class="col-md-6">
+        <label for="exampleInputPassword1" class="ad01"><span>Course Name</span></label>
+        @Html.TextBoxFor(x => x.Course, new { @class = "form-control ads", @PlaceHolder = "Enter your course name" })
+
+
+    </div>
+    <div class="col-md-6">
+        <label for="exampleInputPassword1" class="ad01"><span>Course Code</span></label>
+        @Html.TextBoxFor(x => x.CourseCode, new { @class = "form-control ads", @PlaceHolder = "Enter your course code " })
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <label for="exampleInputPassword1" class="ad01"><span>Professor/Lecturer</span></label>
+        @Html.TextBoxFor(x => x.Professor, new { @class = "form-control ads", @PlaceHolder = "Enter your professor name" })
+
+    </div>
+</div>
+<h2>Selling Information</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <label for="exampleInputPassword1" class="ad02 "><span>Sell For</span><span class="required">*</span></label>
+
+                </div>
+                @Html.RadioButtonFor(x => x.IsPaid, "False", new { @class = "circle1", @id = "box1", @name = "IsPaid" })<span> Free</span>
+                @Html.RadioButtonFor(x => x.IsPaid, "True", new { @class = "circle1", @id = "box2", @name = "IsPaid" })<span> Paid</span>
+                @Html.ValidationMessageFor(model => model.IsPaid, "", new { @class = "text-danger erroemessage error_field" })
+            </div>
+
+        </div>
+        <div>
+            <label for="exampleInputPassword1" class="ad01" id="sp"><span>Sell Price</span><span class="required">*</span></label>
+            @Html.TextBoxFor(x => x.SellingPrice, new { @class = "form-control ads", @id = "sellprice", @PlaceHolder = "Enter your price" })
+
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <label for="exampleInputPassword1" class="ad01"><span>Note Preview</span><span class="required">*</span></label>
+        <input type="file" name="NotesPreview" class="form-control adn pp1" placeholder=" Upload a file" accept="application/pdf">
+
+        @if (@ViewBag.ErrorMessage != null)
+        {
+            <p class="text-danger">@ViewBag.ErrorMessage</p>
+        }
+    </div>
+
+</div>
+<button class="btn btn-primary btn-save" type="submit">SAVE</button>
+
+}
+    </div>
+</section>

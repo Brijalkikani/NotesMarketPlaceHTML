@@ -1,0 +1,66 @@
+﻿@model Notesmarketplace1.Models.Contactmodel
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+
+    <div id="user-profile">
+        <div class="content-box-md">
+            <div class="container02">
+                <div class="row">
+                    <div class="col-md-12 ">
+
+                        <h2>Contact Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--contct us-->
+    <section id="contactus">
+        <div class="container-CU">
+            @using (Html.BeginForm("contactus", "Home", FormMethod.Post, new { }))
+            {
+        <h2> Get in Touch</h2>
+            <p>Let us know how to get back to you</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="cu"><span>Full Name<span class="required">*</span></span></label>
+                    @Html.TextBoxFor(x => x.FullName, new { @class = "form-control cu1", @PlaceHolder = "Enter your full name" })
+                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger erroemessage error_field" })
+
+                <div>
+                    <label for="exampleInputEmail1" class="cu"><span>Email Address<span class="required">*</span></span></label>
+                    @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control cu1", @id = "cu-email", @PlaceHolder = "Enter your email address" })
+                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger erroemessage error_field" })
+
+                </div>
+                <div>
+                    <label for="exampleInputPassword1" class="cu"><span>Subject<span class="required">*</span></span></label>
+                    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control cu1", @PlaceHolder = "Enter your subject" })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger erroemessage error_field" })
+                    
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="exampleInputPassword1" class="cu3"><span>Comments/Questions</span><span class="required">*</span></label>
+                    @Html.TextBoxFor(x => x.Comments, new { @class = "form-control cu2",  @PlaceHolder = "Comments..." })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger erroemessage error_field" })
+                    
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit" id="btn-s">SUBMIT</button>
+
+                </div>
+            </div>
+          
+            }
+        </div>
+    </section>
+   

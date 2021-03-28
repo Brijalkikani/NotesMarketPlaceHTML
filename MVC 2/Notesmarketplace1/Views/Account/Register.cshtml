@@ -1,0 +1,77 @@
+﻿@model Notesmarketplace1.Models.UserRegistration
+
+@{
+    Layout = "~/Views/Shared/_Layoutcommonn.cshtml";
+}
+    <section id="login">
+        <!--logo-->
+        <div id="logo-su" class="text-center">
+            <img src="~/Content/img/admin-images/top-logo.png" />
+        </div>
+        <!--sign up-->
+        <div class="container">
+            <div class="cp text-center">
+                <h2>Create an Account</h2>
+                <p>Enter your details to signup</p>
+            </div>
+            <!--form-->
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
+            {
+                <div class="signup">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="exampleInputPassword1" id="fn">First name<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @PlaceHolder = "Enter your FirstName" })
+                            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="exampleInputPassword1" id="ln">Last Name<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control ", @PlaceHolder = "Enter your LastName" })
+                            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="exampleInputPassword1" id="email1">Email<span class="required">*</span></label>
+                            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control ", @PlaceHolder = "Enter your emailId" })
+                            @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("EmailExist", new { @class = "text-denger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="sign_up">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="exampleInputPassword1" id="pwd">Password</label>
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control su", @PlaceHolder = "Enter your password" })
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <label for="exampleInputPassword1" id="cnfmpwd">Confirm Password</label>
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control su", @PlaceHolder = "Enter confirm password" })
+                            @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span><br><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block" id="btn-su"><span>SIGN UP</span></button>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <p id="acc">Already have an account?<a id="SU">@Html.ActionLink("Login", "Login", "Account", null, new { @class = "page-scroll" })</a></p>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+   
