@@ -1,0 +1,66 @@
+﻿@model Notesmarketplace1.Models.UpdateProfile
+@{
+    ViewBag.Title = "AddAdministrator";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+        <h1>Add Administrator</h1>
+        @using (Html.BeginForm("AddAdministrator", "ManageSystem", FormMethod.Post))
+        {
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>First Name<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control mp02", @PlaceHolder = "Enter Your FirstName" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>Last Name<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control mp02", @PlaceHolder = "Enter Your LastName" })
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Email<span class="required">*</span></label>
+                        @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control mp02 ", @PlaceHolder = "Enter Your email address" })
+
+
+                    </div>
+                </div>
+            </div>
+
+            <label for="exampleInputPassword1" class="mp01">Phone Number</label>
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.DropDownList("Phonenumbercountrycode", new SelectList(ViewBag.countrycode, "ID", "CountryCode"), "", new { @class = "form-control mp05" })
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control mp04 ", @PlaceHolder = "Enter Your phone number", @id = "Phone" })
+
+                    @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+
+                </div>
+
+
+
+            </div>
+            <button class="btn btn-primary" type="submit" id="btn-submit">SUBMIT</button>
+        }
+    </div>
+</section>

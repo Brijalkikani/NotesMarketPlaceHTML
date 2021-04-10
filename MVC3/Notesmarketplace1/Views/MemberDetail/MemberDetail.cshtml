@@ -1,0 +1,166 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    IEnumerable<Notesmarketplace1.Models.User> Model = ViewBag.users;
+    IPagedList<Notesmarketplace1.Models.SellerNote> Model1 = ViewBag.sellernotes;
+}
+@{
+    ViewBag.Title = "MemberDetail";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="member-detail">
+    <div class="container-md">
+        <h1>Member Details</h1>
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-2">
+                        <img src="@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.ProfilePicture).FirstOrDefault()" class="member12">
+                    </div>
+
+                    <div class="col-md-4">
+                        <ul class="member">
+                            <li>First Name:</li>
+                            <li>Last Name:</li>
+                            <li>Email:</li>
+                            <li>DOB:</li>
+                            <li>Phone Number:</li>
+                            <li>Collge/University:</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="member1">
+                            <li>@item.FirstName</li>
+                            <li>@item.LastName</li>
+                            <li>@item.EmailId</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.DOB).FirstOrDefault()</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.PhoneNumber).FirstOrDefault()</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.University).FirstOrDefault()</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-3">
+                        <ul class="member2">
+                            <li>Address 1:</li>
+                            <li>Address 2:</li>
+                            <li>City:</li>
+                            <li>State:</li>
+                            <li>Country:</li>
+                            <li>Zip Code:</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="member3">
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.AddressLine1).FirstOrDefault() </li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.AddressLine2).FirstOrDefault()</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.City).FirstOrDefault()</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.State).FirstOrDefault()</li>
+                            <li>@item.SellerNotes1.Where(x => x.SellerID == item.ID).Select(x => x.Country1.name).FirstOrDefault()</li>
+                            <li>@item.UserProfiles.Where(x => x.UserId == item.ID).Select(x => x.ZipCode).FirstOrDefault()</li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        }
+        <hr>
+
+        <div class="progressn">
+            <div class="section">
+                <h3>Notes</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+
+                            <th style="vertical-align: middle;text-align:center;" scope="col">SR NO.</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink(" NOTE TITLE", "MemberDetail", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("CATEGORY", "MemberDetail", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("STATUS", "MemberDetail", new { sortorder = ViewBag.Statuspeparam })
+                            </th>
+                            <th  style="vertical-align: middle;text-align:center;" scope="col">DOWNLOADED NOTES</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("TOTAL EARNINGS", "MemberDetail", new { sortorder = ViewBag.Earningparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("DATE ADDED", "MemberDetail", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("PUBLISHED DATE", "MemberDetail", new { sortorder = ViewBag.Publishdate })
+                            </th>
+                            <th  style="vertical-align: middle;text-align:center;" scope="col"></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var count = 0;
+                        }
+
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No record found
+                                </td>
+                            </tr>
+                        }
+                        @foreach (var item in Model1)
+                        {
+                            <tr class="table1">
+
+                                <td>@(count + ((Model1.PageNumber - 1) * Model1.PageSize) + 1)</td>
+                                <td><a href="/Admin/AdminNotesDetail/@item.Id">@item.Title</a></td>
+                                <td>@item.NoteCategory.name</td>
+                                <td>@item.Referencedata.value</td>
+                                <td class="text-center"> <a href="/AdminActivity/AdminDownlodNotes">@item.Downloads.Where(x => x.isSellerhasAllowedDownloaded == true).Count()</a></td>
+                                <td>&#36;@item.Downloads.Where(x => x.Seller == x.User.ID && x.isSellerhasAllowedDownloaded == true).Sum(x => x.PurchasedPrice)</td>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.Publisheddate</td>
+
+                                <td>
+                                    <div class="dropdown4">
+                                        <img src="~/Content/img/front-images/dots.png">
+
+                                        <div class="dropdown-content4">
+                                            <a href="/UserActivity/Download/@item.Id">Downloaded Notes</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model1.PageCount < Model1.PageNumber ? 0 : Model1.PageNumber) of @Model1.PageCount
+
+                    @Html.PagedListPager(Model1, page => Url.Action("MemberDetail",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</section>

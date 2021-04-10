@@ -1,0 +1,249 @@
+﻿@model Notesmarketplace1.Models.SellerNote
+
+@{
+
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+
+@using (Html.BeginForm("NotesDetail", "Notes", FormMethod.Get))
+{
+    <section id="notesdetail01">
+        <div class="content-box-md">
+            <div class="container17">
+
+                <h4>Notes Details</h4>
+
+                <div class="row">
+
+                    <div class="col-md-7">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <img src='@Model.DisplayPicture' />
+
+                            </div>
+
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <h3>@Model.Title</h3>
+
+                                <h5>@Model.NoteCategory.name</h5>
+
+                                <p class="para1">@Model.Description</p>
+
+                                @if (Model.Referencedata.value == "published")
+                                {
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        if (Model.IsPaid == true)
+                                        {
+                                            <a href="/Notes/Download/@Model.Id">
+                                                <button class="btn btn-primary btn-DWLD-15" id="DownloadConfirm" type="button"
+                                                        data-toggle="modal" data-target="#exampleModal"
+                                                        onclick="return confirm('Are  sure you wants to download  this paid note?');">
+                                                    DOWNLOAD/$ @Model.SellingPrice
+
+                                                </button>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary btn-DWLD-15" type="button"
+                                                    onclick="location.href='@Url.Action("Download", "Notes", new { id = Model.Id })'">
+                                                DOWNLOAD
+                                            </button>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (Model.IsPaid == true)
+                                        {
+                                            <button class="btn btn-primary btn-DWLD-15" type="button"
+                                                    onclick="location.href='@Url.Action("Login", "Account", new { id = Model.Id })'">
+                                                DOWNLOAD/$ @Model.SellingPrice
+
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary btn-DWLD-15" type="button"
+                                                    onclick="location.href='@Url.Action("Login", "Account", new { id = Model.Id })'">
+                                                DOWNLOAD
+                                            </button>
+                                        }
+                                    }
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="left list-group">
+                                    <li><span>Institution:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.UniversityName</span></li>
+                                    <li>
+                                        <span>Country:</span><span class="nd05" style="color: #6255a5; font-weight: 600;">
+                                            @if (Model.Country != null)
+                                            {
+                                                @Model.Country1.name
+                                            }
+                                        </span>
+                                    </li>
+                                    <li><span>Course Name:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.Course</span></li>
+                                    <li><span>Course Code:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.CourseCode</span></li>
+                                    <li><span>Professor:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.Professor</span></li>
+                                    <li><span>Number of Pages:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.NumberofPages</span></li>
+                                    <li><span>Approved Date:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600;">@Model.CreatedDate.Value.ToString("MMMM  dd yyyy")</span></li>
+                                    <li>
+                                        <span>Rating:</span><span class="text-right nd05" style="color: #6255a5; font-weight: 600; font-size:18px;">
+                                            <div class="rate">
+                                                @{
+
+                                                    var rating = Model.SellerNotesReviews.Where(Model => Model.NoteId == Model.SellerNote.Id).Count();
+                                                    var ratesum = Model.SellerNotesReviews.Where(Model => Model.NoteId == Model.SellerNote.Id).Sum(x => x.Ratings);
+                                                }
+                                                @if (rating > 0)
+                                                {
+
+                                                    for (int i = 1; i <= Math.Round(ratesum / rating); i++)
+                                                    {
+                                                        <i class="text-warning star1 fa fa-star"></i>
+                                                    }
+                                                    for (int i = 1; i <= 5 - Math.Round(ratesum / rating); i++)
+                                                    {
+                                                        <i class="text-muted fa fa-star"></i>
+                                                    }
+                                                }
+                                                @if (rating == 0)
+                                                {
+                                                    for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        <i class="text-muted fa fa-star"></i>
+                                                    }
+                                                }
+                                            </div>
+
+                                            <span>@rating reviews</span>
+
+                                        </span>
+                                    </li>
+                                    <span style="color: red">@Model.SellerNotesReportedIssues.Where(Model => Model.NoteId == Model.SellerNote.Id).Count() Users marked this note as inappropriate</span>
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="container17">
+                        <div class="row">
+                            <div class="col-md-5 pdf-01">
+                                <h4>Notes preview</h4>
+                                <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
+                                    <div class="responsive-wrapper
+     responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
+                                        <iframe src='@Model.NotesPreview'>
+                                            <p style="font-size: 110%;">
+                                                <em>
+                                                    <strong>ERROR: </strong>
+                                                    An &#105;frame should be displayed here but your browser version does not support &#105;frames.
+                                                </em> Please update your browser to its most recent version and try again, or access the file <a href="img/pdf-sample.pdf">with this link.</a>
+                                            </p>
+                                        </iframe>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-7">
+                                <h4>Customer Reviews</h4>
+                                <div class="container-nd">
+                                    @{
+                                        var lastThreeReview = (from p in Model.SellerNotesReviews
+                                                               orderby p.CreatedDate descending
+                                                               select p);
+
+                                        if (lastThreeReview.Count() == 0)
+                                        {
+                                            <div class="row ndimg">
+                                                <p>No Reviews Are Available</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            foreach (var item in lastThreeReview)
+                                            {
+                                                <div class="row ndimg">
+                                                    <div class="col-md-2 col-sm-4">
+                                                        <img src="@item.User.UserProfiles.Where(x => x.UserId == item.ReviewedByid).FirstOrDefault().ProfilePicture" class=" img-circle img-responsive">
+                                                    </div>
+                                                    <div class="col-md-10 col-sm-8">
+                                                        <h5 class="nd-heading">@item.User.FirstName @item.User.LastName</h5>
+                                                        <div class="rate">
+                                                            @if (rating > 0)
+                                                            {
+
+                                                                for (int i = 1; i <= item.Ratings; i++)
+                                                                {
+                                                                    <i class="text-warning star1 fa fa-star"></i>
+                                                                }
+                                                                for (int i = 1; i <= 5 - item.Ratings; i++)
+                                                                {
+                                                                    <i class="text-muted fa fa-star-o"></i>
+                                                                }
+                                                            }
+                                                            @if (rating == 0)
+                                                            {
+                                                                for (int i = 1; i <= 5; i++)
+                                                                {
+                                                                    <i class="text-muted fa fa-star-o"></i>
+                                                                }
+                                                            }
+
+                                                        </div>
+
+                                                        <p class="nd-para">@item.Comments</p>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            }
+
+                                        }
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+    </section>
+}
+<hr>
+
+<!-- Thanks popup -->
+<div class="modal fade modal-top-space" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <div class="modal-body modal-img">
+                <img src="~/Content/img/Notes Details/SUCCESS.png" class="img-circle img-responsive img-center">
+                <h4 class="text-center">Thank you for purchasing</h4>
+                <p><span>Dear @Model.User1.FirstName</span></p>
+
+                <p class="thanks-para">As this is paid notes-you need to pay to seller Rahil Shah offline. We will send him an email that you want to downlaod this one. He may contact you further for payment process completion</p>
+                <p class="thanks-para">In case, you have urgency,</p>
+                <p class="thanks-para">Please contact us on +9195377345959</p>
+                <p class="thanks-para">Once he receives the payment and acknoledge us-selected notes you can see over my downloads tab for download.</p>
+                <p class="thanks-para">Have a good day.</p>
+            </div>
+        </div>
+
+    </div>
+</div>

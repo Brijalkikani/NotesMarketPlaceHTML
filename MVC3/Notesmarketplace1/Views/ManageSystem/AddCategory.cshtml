@@ -1,0 +1,35 @@
+﻿@model Notesmarketplace1.Models.AddCategory
+@{
+    ViewBag.Title = "AddCategory";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+        <h1>Add Category</h1>
+        @using (Html.BeginForm("AddCategory", "ManageSystem", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>Category Name<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(model => model.name, new { @class = "form-control mp02", @PlaceHolder = "Enter category name" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Description<span class="required">*</span></label>
+                        @Html.TextBoxFor(model => model.Description,new { @class = "form-control ac", @PlaceHolder = "Enter your description"} )
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" id="btn-submit">SUBMIT</button>
+        }
+        </div>
+</section>
+
+
+

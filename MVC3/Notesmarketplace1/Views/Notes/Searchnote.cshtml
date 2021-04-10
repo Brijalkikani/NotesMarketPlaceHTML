@@ -1,0 +1,146 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Notesmarketplace1.Models.SearchClass>
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+<!--user profile page-->
+<div id="user-profile">
+    <div class="content-box-md">
+        <div class="container02">
+            <div class="row">
+                <div class="col-md-12 ">
+
+                    <h2>Search Notes</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="seachpage">
+    <div class="content-box-md">
+        <div class="container11">
+            @using (Html.BeginForm("Searchnote", "Notes", FormMethod.Get, new { @id = "submitform" }))
+            {
+                <h2>Search and Filter notes</h2>
+                <div class="container12">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="searchtext" id="search-icon" placeholder="&#xF002;    Search notes here...">
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("NoteType", new SelectList(ViewBag.NoteType, "Id", "Name"), "Select type", new { @class = "form-control s_page", name = "NoteType", onchange = "SubmitForm()" })
+
+                        </div>
+
+
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("Category", new SelectList(ViewBag.NoteCategory, "Id", "name"), "Select  category", new { @class = "form-control  s_page", name = "Category", @id = "11", onchange = "SubmitForm()" })
+
+                        </div>
+
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("UniversityName", new SelectList(ViewBag.University), "Select university ", new { @class = "form-control  s_page", @id = "11", onchange = "SubmitForm()" })
+
+                        </div>
+
+
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("Course", new SelectList(ViewBag.Course), "Select course", new { @class = "form-control  s_page", @id = "11", onchange = "SubmitForm()" })
+
+                        </div>
+
+
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("Country", new SelectList(ViewBag.Country, "ID", "Name"), "Select country", new { @class = "form-control s_page", name = "Country", @id = "11", onchange = "SubmitForm()" })
+
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 form-group">
+                            @Html.DropDownList("Rating", new SelectList(ViewBag.Rating), "Select rating", new { @class = "form-control s_page", name = "Rating", @id = "11", onchange = "SubmitForm()" })
+
+                          
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!--total notes-->
+        <div class="container13">
+            <h2>Total @ViewBag.Totalcount notes</h2>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 form-group">
+                        <div class="card">
+
+                            <img src='@item.sellernotedetail.DisplayPicture' />
+
+                            <div class="searchnote card-body">
+                                <a href="/Notes/NotesDetail/@item.sellernotedetail.Id"><h3 class="card-title">@item.sellernotedetail.Title</h3></a>
+
+                                <div class="card-text">
+                                    <ul class="office-details list-group list-group-flush">
+                                        <li><i class="fa fa-university"></i><span>@item.sellernotedetail.UniversityName</span></li>
+                                        <li><i class="fa fa-book"></i><span>@item.sellernotedetail.NumberofPages  Pages</span></li>
+                                        <li><i class="fa fa-calendar"></i><span>@item.sellernotedetail.CreatedDate.Value.ToString("ddd,  MMM  dd yyyy")</span></li>
+                                        <li><i class="fa fa-flag"></i><span style="color: red">@item.sellernotedetail.SellerNotesReportedIssues.Where(Model => Model.NoteId == Model.SellerNote.Id).Count() Users marked this note as inappropriate</span></li>
+                                    </ul>
+                                    <div class="rate">
+                                        @{
+                                            var rating = item.sellernotedetail.SellerNotesReviews.Where(Model => Model.NoteId == Model.SellerNote.Id).Count();
+                                            var ratesum = item.sellernotedetail.SellerNotesReviews.Where(Model => Model.NoteId == Model.SellerNote.Id).Sum(x => x.Ratings);
+
+                                           
+                                        }
+                                        @if (rating > 0)
+                                        {
+
+                                            for (int i = 1; i <= Math.Round(ratesum / rating); i++)
+                                            {
+                                                <i class="text-warning star1 fa fa-star"></i>
+                                            }
+                                            for (int i = 1; i <= 5 - Math.Round(ratesum / rating); i++)
+                                            {
+                                                <i class="text-muted fa fa-star-o"></i>
+                                            }
+                                        }
+                                        @if (rating == 0)
+                                        {
+                                            for (int i = 1; i <= 5; i++)
+                                            {
+                                                <i class="text-muted fa fa-star-o"></i>
+                                            }
+                                        }
+                                    </div>
+                                       
+                                    <p>@rating Reviews</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="text-center">
+                <ul class="pagination">
+                    <li>
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => Url.Action("Searchnote",
+                            new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                   , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+</section>

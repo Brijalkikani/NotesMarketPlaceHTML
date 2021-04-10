@@ -1,0 +1,119 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Notesmarketplace1.Models.Country>
+@{
+    ViewBag.Title = "ManageCountry";
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+        <h1>Manage Country</h1>
+        <div class="progressn">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/ManageSystem/AddCountry"><button  id="button-add-category">ADD COUNTRY</button></a>
+                    </div>
+                    @using (Html.BeginForm("ManageCountry", "ManageSystem", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                    </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+                            <th scope="col" style="vertical-align: middle;text-align:center;">SR NO.</th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("COUNTRY NAME", "ManageCountry", new { sortorder = ViewBag.nameparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("COUNTRY CODE", "ManageCountry", new { sortorder = ViewBag.Countrycodeparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("DATE ADDED", "ManageCountry", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ADDEDBY", "ManageCountry", new { sortorder = ViewBag.Addedparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ACTIVE", "ManageCountry", new { sortorder = ViewBag.Typeparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">ACTION</th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                    <tr class="table1">
+
+                        <td style="vertical-align: middle;text-align:center;">@(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.name</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.CountryCode</td>
+
+                        <td style="vertical-align: middle;text-align:center;">@item.Createddate</td>
+                        <td style="vertical-align: middle;text-align:center;">
+                            @item.User.Countries.Where(x => x.CreatedBy == x.User.ID).Select(x => x.User.FirstName).FirstOrDefault()
+                            @item.User.Countries.Where(x => x.CreatedBy == x.User.ID).Select(x => x.User.LastName).FirstOrDefault()
+                        </td>
+                        <td style="vertical-align: middle;text-align:center;">
+                            @if (@item.isActive)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        </td>
+                        <td style="vertical-align: middle;text-align:center;"><a href="/ManageSystem/AddCountry/@item.ID"><img src="~/Content/img/Dashboard/edit.png"></a><a href="/ManageSystem/DeleteCountry/@item.ID"><img src="~/Content/img/front-images/delete.png" onclick="return confirm('Are you sure you wants to make this Country inactive?');"></a></td>
+
+                    </tr>
+                            count++;
+                        }
+                           
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("ManageCountry",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</section>
