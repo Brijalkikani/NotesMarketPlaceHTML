@@ -1,0 +1,166 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model IPagedList<Notesmarketplace1.Models.DashboardClass>
+@{
+    ViewBag.Title = "NotesUnderReview";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="member-detail">
+    <div class="container-md">
+        <h1 style="margin-bottom:20px">Notes Under Review</h1>
+        <div class="progressn">
+            <div class="section">
+                @using (Html.BeginForm("NotesUnderReview", "AdminActivity", FormMethod.Get, new { @id = "submitform" }))
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="gender" id="sell">Seller</label>
+                            @Html.DropDownList("Seller", new SelectList(ViewBag.Seller2, "ID", "FirstName"), "Select seller ", new { @class = "form-control seller", @id = "month", @name = "Seller", onchange = "SubmitForm()" })
+
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 25px;">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="searchtext" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+
+                            <th style="vertical-align: middle;text-align:center;" scope="col">SR NO.</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("TITLE", "NotesUnderReview", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("CATEGORY", "NotesUnderReview", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("SELLER", "NotesUnderReview", new { sortorder = ViewBag.Seller1 })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col"></th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("DATE ADDED", "NotesUnderReview", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("STATUS", "NotesUnderReview", new { sortorder = ViewBag.Statuspeparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">ACTION</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table1">
+
+                                <td> @(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+
+                                <td style="color: #6255a5;"><a href="/Admin/AdminNotesDetail/@item.sellernotedetail.Id" style="color:#6255a5;">@item.sellernotedetail.Title</a></td>
+                                <td>@item.notecategorydetail.name</td>
+                                <td>@item.userdetail.FirstName @item.userdetail.LastName</td>
+                                <td>
+                                    <a href="/MemberDetail/MemberDetail/@item.sellernotedetail.SellerID">
+                                        <img src="~/Content/img/front-images/eye.png">
+                                    </a>
+                                </td>
+
+                                <td>@item.sellernotedetail.CreatedDate</td>
+                                <td>@item.referencedatadetail.value</td>
+                                <td>
+                                    <a href="/AdminActivity/Approve/@item.sellernotedetail.Id">
+                                        <button type="submit" class="btn btn-primary button-red" onclick="return confirm('Please press yes to continue. ?');">Approve</button>
+                                    </a>
+
+                                    <button class="btn btn-primary button-green" data-toggle="modal" data-target="#exampleModal_@item.sellernotedetail.Id">Reject</button>
+                                    @if (item.sellernotedetail.Referencedata.value == "submitted for review")
+                                    {
+                                        <a href="/AdminActivity/InReview/@item.sellernotedetail.Id">
+                                            <button type="submit" class="btn btn-primary button-blue" onclick="return confirm('Review process has been intiated.PLease press yes to continue. ?');">InReview</button>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-primary btn_markunder">Mark Under Review</button>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="dropdown6">
+                                        <img src="~/Content/img/front-images/dots.png" class="dots">
+                                        <div class="dropdown-content6">
+                                            <a href="/UserActivity/Download/@item.sellernotedetail.Id">Download Notes</a>
+                                            <a href="/Admin/AdminNotesDetail/@item.sellernotedetail.Id">View More Details</a>
+                                        </div>
+                                    </div>
+                                    <!-- Rejected popup -->
+                                    <div class="modal fade" id="exampleModal_@item.sellernotedetail.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content Rejectpopup">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" value="Cancel">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                @using (Html.BeginForm("RejectNote", "AdminActivity", FormMethod.Post))
+                                                {
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="id" value="@item.sellernotedetail.Id" />
+                                                        <h4 class="star-head">@item.sellernotedetail.Title-@item.notecategorydetail.name</h4>
+
+                                                        <label for="text-area"><span class="review-label">Remarks*</span></label>
+                                                        <textarea class="form-control user" placeholder="Write Remarks" rows="7" name="remarks" required></textarea>
+                                                        <br>
+                                                        <form style="float:right; margin-bottom:20px;">
+                                                            <button type="submit" class="button-green" onclick="return confirm('Are you sure you want to reject seller request? ?');">Reject</button><button type="button" class="cancel-button button-blue" data-dismiss="modal" aria-label="Close" value="Cancel">Cancel</button>
+
+                                                        </form>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            count++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("NotesUnderReview",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</section>
+
+

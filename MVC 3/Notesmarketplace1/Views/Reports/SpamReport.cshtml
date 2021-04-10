@@ -1,0 +1,110 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Notesmarketplace1.Models.SellerNotesReportedIssue>
+@{
+    ViewBag.Title = "SpamReport";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="member-detail">
+    <div class="container-md">
+        <div class="progressn">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 style="margin-bottom:20px">Spam Reports</h1>
+                    </div>
+                    @using (Html.BeginForm("SpamReport", "Reports", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+                            <th style="vertical-align: middle;text-align:center;" class="table-center" scope="col">SR NO.</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("REPORTED BY", "SpamReport", new { sortorder = ViewBag.Reportedbyparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" class="table-center" scope="col">REPORTED BY</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("NOTE TITLE", "SpamReport", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("CATEGORY", "SpamReport", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("DATE EDITED", "SpamReport", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("REMARK", "SpamReport", new { sortorder = ViewBag.Descriptionparam })
+                            </th>
+
+                            <th style="vertical-align: middle;text-align:center;" class="table-center" scope="col">ACTION</th>
+                            <th style="vertical-align: middle;text-align:center;" class="table-center" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table1">
+                                <td style="vertical-align: middle;text-align:center;" class="table-center"> @(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center">
+                                    @item.User.SellerNotesReportedIssues.Where(x => x.ReportedByid == x.User.ID).Select(x => x.User.FirstName).FirstOrDefault()
+                                    @item.User.SellerNotesReportedIssues.Where(x => x.ReportedByid == x.User.ID).Select(x => x.User.LastName).FirstOrDefault()
+                                </td>
+                                <td style="color: #6255a5; vertical-align: middle;text-align:center;" class="table-center">@item.SellerNote.Title</td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center">@item.SellerNote.NoteCategory.name</td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center">@item.CreatedDate</td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center">@item.Remarks</td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center"><a href="/Reports/Delete/@item.NoteId"><img src="~/Content/img/front-images/delete.png" onclick="Are you sure you want to delete reported issue ?');"></a></td>
+                                <td style="vertical-align: middle;text-align:center;" class="table-center">
+                                    <div class="dropdown5">
+                                        <img src="~/Content/img/front-images/dots.png">
+                                        <div class="dropdown-content5">
+                                            <a href="/UserActivity/Download/@item.NoteId">Downloaded Notes</a>
+                                            <a href="/Admin/AdminNotesDetail/@item.NoteId">View More Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("SpamReport",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+

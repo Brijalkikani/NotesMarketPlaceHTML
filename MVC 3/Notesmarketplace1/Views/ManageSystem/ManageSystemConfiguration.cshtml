@@ -1,0 +1,98 @@
+﻿@model Notesmarketplace1.Models.Managesystem
+@{
+    ViewBag.Title = "ManageSystemConfiguration";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+        <h1>Manage System Configuration</h1>
+        @using (Html.BeginForm("ManageSystemConfiguration", "ManageSystem", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>Support email address<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(x => x.SupportEmailid, new { @class = "form-control mp02", @PlaceHolder = "Enter support emailId" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>Password<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control mp02", @PlaceHolder = "Enter support password" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01"><span>Support Phone number<span class="required">*</span></span></label>
+                        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control mp02 ", @PlaceHolder = "Enter Your phone number" })
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Email Address(es)(for various events system will send notifications to these users)<span class="required">*</span></label>
+                        @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control mp02", @PlaceHolder = "Enter emailId" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Facebook URL</label>
+                        @Html.TextBoxFor(x => x.Facebook, new { @class = "form-control mp02 ", @PlaceHolder = "Enter facebook url" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Twitter URL</label>
+                        @Html.TextBoxFor(x => x.Twitter, new { @class = "form-control mp02 ", @PlaceHolder = "Enter twitter url" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Linkedin URL</label>
+                        @Html.TextBoxFor(x => x.Linkedin, new { @class = "form-control mp02 ", @PlaceHolder = "Enter Linkdin url" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Default image for notes (if seller do not upload)</label>
+
+                        <input type="file" class="form-control mp03" id="prifile_p" name="DisplayPicture" placeholder="Upload a Picture" onchange="return fileValidation1()" style="height:100px">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="mp01">Default profile picture(if seller do not upload)</label>
+
+                        <input type="file" class="form-control mp03" id="prifile_p" name="ProfilePicture" placeholder="Upload a Picture" onchange="return fileValidation1()" style="height:100px" />
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" id="btn-submit">SUBMIT</button>
+        }
+    </div>
+</section>

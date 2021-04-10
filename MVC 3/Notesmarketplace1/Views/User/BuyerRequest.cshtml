@@ -1,0 +1,129 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Notesmarketplace1.Models.DownloadModel>
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+
+<div class="dashboard-title-wrapper">
+    <div class="container-ds">
+        <div class="mydownloads">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Buyer Requests</h2>
+                    </div>
+                    @using (Html.BeginForm("BuyerRequest", "User", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" name="search" id="place-search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="font-weight: 600;">
+                            <th scope="col" style="vertical-align: middle;text-align:center;">SR.NO.</th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink(" NOTE TITLE", "BuyerRequest", new { sort = ViewBag.TitleparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("CATEGORY", "BuyerRequest", new { sort = ViewBag.CategoryparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">BUYER</th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">PHONE NO.</th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("SELL TYPE", "BuyerRequest", new { sort = ViewBag.SelltypeparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("PRICE", "BuyerRequest", new { sort = ViewBag.PricepeparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("DOWNLOAD DATE/TIME", "BuyerRequest", new { sort = ViewBag.AddedDateparamPublished })
+                            </th>
+                            <th scope="col"> </th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+
+                            <tr class="table2">
+                                <td style="vertical-align: middle;text-align:center;">
+                                    @(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)
+                                </td>
+                                <td style="vertical-align: middle;text-align:center;"><a href="/Notes/NotesDetail/@item.Downloaddetail.NoteId" style="color: #6255a5;">@item.Downloaddetail.NoteTitle</a></td>
+                                <td style="vertical-align: middle;text-align:center;">@item.Downloaddetail.NoteCategory</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.Userdetail.EmailId</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.Userprofiledetail.PhoneNumber</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    @if (@item.Downloaddetail.Ispaid == true)
+                                    {
+                                        <p>Paid</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Free</p>
+                                    }
+                                </td>
+                                <td style="vertical-align: middle;text-align:center;">$@item.Downloaddetail.PurchasedPrice</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.Downloaddetail.AttachmentDownloadedDate</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    <a href="/Notes/NotesDetail/@item.Downloaddetail.NoteId"><img src="~/Content/img/Dashboard/eye.png" role="button" /></a>
+                                </td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    <div class="dropdown1">
+                                        <img src="~/Content/img/front-images/dots.png" />
+
+                                        <div class="dropdown-content1">
+                                            <a href="/User/AllowDownload?id=@item.Downloaddetail.NoteId&buyerid=@item.Downloaddetail.downloader">Allow Download</a>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+
+                            </tr>
+                            count++;
+                        }
+                        
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("BuyerRequest",
+                        new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+

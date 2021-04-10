@@ -1,0 +1,268 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    IPagedList<Notesmarketplace1.Models.DashboardClass> Model = ViewBag.tabledetails;
+    IPagedList<Notesmarketplace1.Models.DashboardClass> PublishedModel = ViewBag.publishednotes;
+}
+
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+<!---dashboard page-->
+<div class="dashboard-title-wrapper">
+    <div class="container-ds">
+        <div class="dashboard-title-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary" type="button" id="btn-add"><a href="/Notes/addnotes">ADD NOTE</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-7 col-sm-7 dash-left  ds01 ">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+
+                        <div class="earning-detail text-center">
+                            <div class="earning-img ">
+                                <img src="~/Content/img/Dashboard/earning-icon.svg" />
+                               
+                            </div>
+                            <p>My Earning</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="number-detail text-center">
+                            <a href="/UserActivity/MySoldNotes">
+                                <p>@ViewBag.SoldNotes</p></a>
+                                <h4>Numbers of Notes Sold</h4>
+</div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="number-detail text-center">
+                            <a href="/UserActivity/MySoldNotes">
+                                <p>&#36; @ViewBag.sellingprice</p></a>
+                                <h4>Money Earned</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 ds02">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="download text-center">
+                            <a href="/UserActivity/MyDownload">
+                                <p>@ViewBag.MyDownload</p></a>
+                                <h4>My Downloads</h4>
+</div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="rejected text-center">
+                            <a href="/UserActivity/MyRejected">
+                                <p>@ViewBag.Rejectednote</p></a>
+                                <h4>My Rejected Notes</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="br text-center">
+                            <a href="/User/BuyerRequest">
+                                <p>@ViewBag.BuyerRequest</p></a>
+                                <h4>Buyer Requests</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="progressn">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>In Progress Notes </h2>
+                    </div>
+                    @using (Html.BeginForm("Dashboard", "Notes", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+
+                                <input type="text" name="searchtext" id="place-search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border common-table-width">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ADDED DATE", "Dashboard", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("TITLE", "Dashboard", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("CATEGORY", "Dashboard", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("STATUS", "Dashboard", new { sortorder = ViewBag.Statusparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">ACTIONS</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table1">
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.CreatedDate</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.Title</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.notecategorydetail.name</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.referencedatadetail.value</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    @if (@item.referencedatadetail.value == "draft")
+                                    {
+                                        <a href="/Notes/Editnote/@item.sellernotedetail.Id"><img src="~/Content/img/Dashboard/edit.png" role="button" /></a>
+                                        <a href="/Notes/Delete/@item.sellernotedetail.Id">
+                                            <img src="~/Content/img/front-images/delete.png" role="button" onclick="return confirm('Are you sure you wants to delete this note');" />
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Notes/NotesDetail/@item.sellernotedetail.Id"><img src="~/Content/img/Dashboard/eye.png" role="button" /></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("Dashboard",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+
+
+            </ul>
+        </div>
+        <!---under table-->
+        <div class="progressn">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>Published Notes </h2>
+                    </div>
+                    @using (Html.BeginForm("Dashboard", "Notes", FormMethod.Get))
+                    {
+                        <div class="col-md-6">
+                            <div class="btn-search">
+                                <input type="text" name="search" id="place-search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border common-table-width">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ADDED DATE", "Dashboard", new { sort = ViewBag.AddedDateparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("TITLE", "Dashboard", new { sort = ViewBag.TitleparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("CATEGORY", "Dashboard", new { sort = ViewBag.CategoryparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("SELL TYPE", "Dashboard", new { sort = ViewBag.SelltypeparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("PRICE", "Dashboard", new { sort = ViewBag.PricepeparamPublished })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">ACTIONS</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (PublishedModel.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @foreach (var item1 in PublishedModel)
+                        {
+                            <tr class="table1">
+                                <td style="vertical-align: middle;text-align:center;">@item1.sellernotedetail.CreatedDate</td>
+                                <td style="vertical-align: middle;text-align:center;">@item1.sellernotedetail.Title</td>
+                                <td style="vertical-align: middle;text-align:center;">@item1.notecategorydetail.name</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    @if (@item1.sellernotedetail.IsPaid == true)
+                                    {<p>Paid</p>}
+                                    else
+                                    {
+                                        <p>Free</p>
+                                    }
+                                </td>
+                                <td style="vertical-align: middle;text-align:center;">$@item1.sellernotedetail.SellingPrice</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    <a href="/Notes/NotesDetail/@item1.sellernotedetail.Id"><img src="~/Content/img/Dashboard/eye.png" role="button" /></a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(PublishedModel.PageCount < PublishedModel.PageNumber ? 0 : PublishedModel.PageNumber) of @PublishedModel.PageCount
+
+                    @Html.PagedListPager(PublishedModel, pagee => Url.Action("Dashboard",
+                        new { pagee, sort = ViewBag.CurrentSort1, currentFilter1 = ViewBag.CurrentFilter1 })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

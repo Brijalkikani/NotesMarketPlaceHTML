@@ -1,0 +1,127 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Notesmarketplace1.Models.DownloadModel>
+@{
+    ViewBag.Title = "MySoldNotes";
+}
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+
+}
+<div class="dashboard-title-wrapper">
+    <div class="container-ds">
+        <div class="mydownloads">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>My Sold Notes </h2>
+                    </div>
+                    @using (Html.BeginForm("MySoldNotes", "UserActivity", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" name="search" id="place-search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                    </div>
+            </div>
+
+            <table class="table border">
+                <thead>
+                    <tr style="height: 70px; font-weight: 600;">
+                        <th scope="col" style="vertical-align: middle;text-align:center;">SR.NO.</th>
+
+                        <th scope="col" style="vertical-align: middle;text-align:center;">
+                            @Html.ActionLink("NOTE TITLE", "MySoldNotes", new { sort = ViewBag.TitleparamPublished })
+                        </th>
+                        <th scope="col" style="vertical-align: middle;text-align:center;">
+                            @Html.ActionLink("CATEGORY", "MySoldNotes", new { sort = ViewBag.CategoryparamPublished })
+                        </th>
+                        <th scope="col" style="vertical-align: middle;text-align:center;">BUYER</th>
+
+                        <th scope="col" style="vertical-align: middle;text-align:center;">
+                            @Html.ActionLink("SELL TYPE", "MySoldNotes", new { sort = ViewBag.SelltypeparamPublished })
+                        </th>
+                        <th scope="col" style="vertical-align: middle;text-align:center;">
+                            @Html.ActionLink("PRICE", "MySoldNotes", new { sort = ViewBag.PricepeparamPublished })
+                        </th>
+                        <th scope="col" style="vertical-align: middle;text-align:center;">
+                            @Html.ActionLink("DOWNLOAD DATE/TIME", "MySoldNotes", new { sort = ViewBag.AddedDateparamPublished })
+                        </th>
+                        <th scope="col"> </th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                No any record found
+                            </td>
+                        </tr>
+                    }
+                    @{
+                        var count = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+
+                <tr class="table2">
+                    <td>
+                        @(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)
+                    </td>
+                    <td style="color: #6255a5;">@item.Downloaddetail.NoteTitle</td>
+                    <td>@item.Downloaddetail.NoteCategory</td>
+                    <td>@item.Userdetail.EmailId</td>
+
+                    <td>
+                        @if (@item.Downloaddetail.Ispaid == true)
+                        {
+                            <p>Paid</p>
+                        }
+                        else
+                        {
+                            <p>Free</p>
+                        }
+                    </td>
+                    <td>$@item.Downloaddetail.PurchasedPrice</td>
+                    <td>@item.Downloaddetail.AttachmentDownloadedDate</td>
+                    <td>
+                        <a href="/Notes/NotesDetail/@item.Downloaddetail.NoteId"><img src="~/Content/img/Dashboard/eye.png" role="button" /></a>
+                    </td>
+                    <td>
+                        <div class="dropdown1">
+                            <img src="~/Content/img/front-images/dots.png" class="dots" />
+                            <div class="dropdown-content1">
+                                <a href="/UserActivity/Download/@item.Downloaddetail.NoteId">Download Note</a>
+
+                            </div>
+                        </div>
+                    </td>
+                    
+
+                </tr>
+                        count++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("MysoldNotes",
+                        new { page, sort = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

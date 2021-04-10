@@ -1,0 +1,119 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model IPagedList<Notesmarketplace1.Models.DashboardClass>
+@{
+    ViewBag.Title = "AdminRejectedNotes";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="member-detail">
+    <div class="container-md">
+        <h1 style="margin-bottom:20px">Rejected Notes</h1>
+        <div class="progressn">
+            <div class="section">
+                @using (Html.BeginForm("AdminRejectedNotes", "AdminActivity", FormMethod.Get, new { @id = "submitform" }))
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="gender" id="sell">Seller</label>
+                            @Html.DropDownList("Seller", new SelectList(ViewBag.Seller, "ID", "FirstName"), "Select seller ", new { @class = "form-control seller", @id = "month", @name = "Seller", onchange = "SubmitForm()" })
+
+                        </div>
+
+                        <div class="col-md-6" style="margin-top: 25px;">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="searchtext" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+
+
+                            <th style="vertical-align: middle;text-align:center;" scope="col">SR NO.</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("TITLE", "AdminRejectedNotes", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("CATEGORY", "AdminRejectedNotes", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("SELLER", "AdminRejectedNotes", new { sortorder = ViewBag.Sellerparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col"></th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("DATE EDITED", "AdminRejectedNotes", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("REJECT BY", "AdminRejectedNotes", new { sortorder = ViewBag.Rejectbyparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("REMARK", "AdminRejectedNotes", new { sortorder = ViewBag.Statuspeparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;"></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table1">
+
+                                <td style="vertical-align: middle;text-align:center;">@(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+
+                                <td style="color: #6255a5; vertical-align: middle;text-align:center;"><a href="/Admin/AdminNotesDetail/@item.sellernotedetail.Id" style="color: #6255a5;">@item.sellernotedetail.Title</a></td>
+                                <td style="vertical-align: middle;text-align:center;">@item.notecategorydetail.name</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.User1.FirstName</td>
+                                <td style="vertical-align: middle;text-align:center;"><a href="/MemberDetail/MemberDetail/@item.sellernotedetail.SellerID"><img src="~/Content/img/Dashboard/eye.png"></a></td>
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.ModifiedDate</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.User.FirstName</td>
+                                <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.AdminRemarks</td>
+                                <td style="vertical-align: middle;text-align:center;">
+                                    <div class="dropdown2">
+                                        <img src="~/Content/img/front-images/dots.png" class="dots">
+                                        <div class="dropdown-content2">
+                                            <a href="/AdminActivity/Approve/@item.sellernotedetail.Id" onclick="return confirm('Please press yes to continue. ?');">Approve</a>
+                                            <a href="/UserActivity/Download/@item.sellernotedetail.Id">Downloaded Notes</a>
+                                            <a href="/Admin/AdminNotesDetail/@item.sellernotedetail.Id">View More Details</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("AdminRejectedNotes",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

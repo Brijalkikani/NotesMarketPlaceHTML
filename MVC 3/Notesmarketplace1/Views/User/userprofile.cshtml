@@ -1,0 +1,212 @@
+﻿@model Notesmarketplace1.Models.Userprofilee
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+}
+    <div id="user-profile">
+        <div class="content-box-md">
+            <div class="container02">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h2>User Profile</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--basic-->
+    @using (Html.BeginForm("userprofile", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <section id="basic-profile">
+            <div class="container-01 form-group">
+                <div class="row">
+                    <!--left side-->
+                    <h3>Basic Profile Details</h3>
+
+                   <div class="col-md-6">
+
+                        <div id="basic_left" class="basic-left center">
+                            @Html.HiddenFor(x=>x.UserId)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword1" id="fn">First Name<span class="required">*</span></label>
+                                    @Html.TextBoxFor(model=>model.FirstName, new { @class = "form-control", @PlaceHolder = "Enter Your FirstName" })
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword1" id="email1">Email<span class="required">*</span></label>
+                                    @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control ", @PlaceHolder = "Enter Your emailId",@readonly="readonly"})
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="gender" id="gen">Gender</label><br>
+                                    @Html.DropDownList("Gender", new SelectList(ViewBag.Gender, "Id", "value"), "Select your gender", new { @class = "form-control", @id="Gender"})
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label id="pp">Profile Picture</label>
+                                    <input type="file" name="ProfilePicture" class="form-control" id="prifile_p" placeholder=" Upload a picture" onchange="return fileValidation1()">
+                                    <span id="ProfilePicture-error" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--right side-->
+                    <div class="col-md-6">
+                        <div id="basic_right" class="basic-right up01">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword1" id="ln">Last Name<span class="required">*</span></label>
+                                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control ", @PlaceHolder = "Enter Your LastName" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="dob" id="DOB">Date Of Birth</label>
+                                    <input type="date" class="form-control" id="dob" placeholder="Enter your Date of Birth" name="DOB">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <label for="phone" id="PHONE">Phone Number</label>
+                                    @Html.DropDownList("Phonenumbercountrycode", new SelectList(ViewBag.countrycode, "ID", "CountryCode"), "", new { @class = "form-control ", @id = "phone" })
+                                 
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control ", @PlaceHolder = "Enter Your phone number" , @id = "Phone" })
+                                    
+                                    @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--address-->
+        <section id="Address">
+            <div class="container-03 form-group">
+                <div class="row">
+                    <!--left side-->
+                    <h3>Address Details</h3>
+                    <div class="col-md-6">
+
+                        <div id="basic_left" class="basic-left center">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="fn"><span>Adress Line 1<span class="required">*</span></span></label>
+                                    @Html.TextBoxFor(x => x.AddressLine1, new { @class = "form-control ", @PlaceHolder = "Enter Your address" , @id = "fname" })
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="email1">City<span class="required">*</span></label>
+                                    @Html.TextBoxFor(x => x.City, new { @class = "form-control ", @PlaceHolder = "Enter Your city", @id = "email0" })
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="email1">Zip Code<span class="required">*</span></label>
+                                    @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control ", @PlaceHolder = "Enter Your zipcode", @id = "email0" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--right side-->
+
+                    <div class="col-md-6">
+                        <div id="basic_right" class="basic-right">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputPassword1" id="fn">Adress Line 2</label>
+                                    @Html.TextBoxFor(x => x.AddressLine2, new { @class = "form-control ", @PlaceHolder = "Enter Your address", @id = "fname" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="email1">State<span class="required">*</span></label>
+                                    @Html.TextBoxFor(x => x.State, new { @class = "form-control ", @PlaceHolder = "Enter Your state", @id = "email0" })
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="gender" id="gen">Country</label><br>
+                                    @Html.DropDownList("Country", new SelectList(ViewBag.Country, "ID", "Name"), "Select your country", new { @class = "form-control ads", name = "Country" ,@id="Gender"})
+
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!---university nd college-->
+        <section id="U-C">
+            <div class="container-04 form-group">
+                <div class="row">
+                    <!--left side-->
+                    <h3>University and College Information</h3>
+                    <div class="col-md-6">
+
+                        <div id="basic_left" class="basic-left center">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="fn">University</label>
+                                    @Html.TextBoxFor(x => x.University, new { @class = "form-control ", @PlaceHolder = "Enter Your university", @id = "fname" })
+                                   
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+                    </div>
+                    <!--right side-->
+
+                    <div class="col-md-6">
+                        <div id="basic_right" class="basic-right">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label for="exampleInputPassword1" id="fn">College</label>
+                                    @Html.TextBoxFor(x => x.College, new { @class = "form-control ", @PlaceHolder = "Enter Your college", @id = "fname" })
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="submit" id="btn-sub">SUBMIT</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    }
+   

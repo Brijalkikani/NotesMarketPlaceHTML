@@ -1,0 +1,139 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Notesmarketplace1.Models.User>
+@{
+    ViewBag.Title = "Member";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+
+        <div class="progressn">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1>Members</h1>
+                    </div>
+                    @using (Html.BeginForm("Member", "MemberDetail", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">SR NO.</th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("FIRST NAME", "Member", new { sortorder = ViewBag.Firstnameparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("LAST NAME", "Member", new { sortorder = ViewBag.Lastnameparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("EMAIL", "Member", new { sortorder = ViewBag.Emailparam })
+                            </th>
+
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("JOINING DATE", "Member", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("UNDER REVIEW NOTES", "Member", new { sortorder = ViewBag.UnderReviewparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("PUBLISHED NOTES", "Member", new { sortorder = ViewBag.Publishnotes })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("DOWNLOAD NOTES", "Member", new { sortorder = ViewBag.Downloadnotes })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("TOTAL EXPENSES", "Member", new { sortorder = ViewBag.Expenseparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("TOTAL EARNINGS", "Member", new { sortorder = ViewBag.Earningparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr class="table1">
+                                <td>@(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.EmailId</td>
+                                <td>@item.CreatedDate</td>
+                                <td>
+                                    <a href="/AdminActivity/NotesUnderReview">@item.SellerNotes1.Where(x => x.Referencedata.RefCategory == "note status" && (x.Referencedata.value == "submitted for review" || x.Referencedata.value == "in review")).Select(x => x.Id).Count()</a>
+                                </td>
+
+                                <td><a href="/AdminActivity/AdminPublishedNotes">@item.SellerNotes1.Where(x => x.Referencedata.RefCategory == "note status" && x.Referencedata.value == "published").Select(x => x.Id).Count()</a></td>
+
+
+                                <td>
+                                    <a href="/AdminActivity/AdminDownlodNotes">
+                                        @item.Downloads.Where(x => x.isSellerhasAllowedDownloaded == true && x.Seller == x.User.ID).Count()
+                                    </a>
+                                </td>
+
+                                <td> <a href="/AdminActivity/AdminDownlodNotes">&#36;@item.Downloads1.Where(x => x.isSellerhasAllowedDownloaded == true && x.downloader == item.ID).Sum(x => x.PurchasedPrice) </a></td>
+
+                                <td>&#36;@item.Downloads.Where(x => x.isSellerhasAllowedDownloaded == true && x.Seller == item.ID).Sum(x => x.PurchasedPrice)</td>
+                                <td>
+                                    <div class="dropdown5">
+                                        <img src="~/Content/img/front-images/dots.png" class="dots">
+                                        <div class="dropdown-content5">
+
+
+                                            <a href="/MemberDetail/MemberDetail/@item.ID">View More Details</a>
+                                            <a href="/MemberDetail/Deactivate/@item.ID" onclick="return confirm('Are you sure you want to make this member inactive?');">Deactivate</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            count++;
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("Member",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+

@@ -1,0 +1,105 @@
+﻿
+
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Notesmarketplace1.Models.DashboardClass>
+@{
+    ViewBag.Title = "MyRejected";
+}
+@{
+    Layout = "~/Views/Shared/_Layoutcommon.cshtml";
+
+}
+<div class="dashboard-title-wrapper">
+    <div class="container-ds">
+        <div class="mydownloads">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>My Rejected Notes</h2>
+                    </div>
+                    @using (Html.BeginForm("MyRejected", "UserActivity", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="searchtext" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 70px; font-weight: 600;">
+                            <th style="vertical-align: middle;text-align:center;" scope="col">SR NO.</th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("NOTE TITLE", "MyRejected", new { sortorder = ViewBag.Titleparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("CATEGORY", "MyRejected", new { sortorder = ViewBag.Categoryparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("REMARKS", "MyRejected", new { sortorder = ViewBag.Statuspeparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col">
+                                @Html.ActionLink("DATE EDITED", "MyRejected", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th style="vertical-align: middle;text-align:center;" scope="col"> CLONE</th>
+                            <th scope="col"> </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        No any record found
+                                    </td>
+                                </tr>
+                            }
+                        @{
+                                var count = 0;
+                            }
+                        @foreach (var item in Model)
+                        {
+                    <tr class="table2">
+                        <td style="vertical-align: middle;text-align:center;">@(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                        <td style="color: #6255a5; vertical-align: middle;text-align:center;">@item.sellernotedetail.Title</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.notecategorydetail.name</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.AdminRemarks</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.sellernotedetail.ModifiedDate</td>
+                        <td style=" vertical-align: middle;text-align:center;"><a href="/UserActivity/Clone/@item.sellernotedetail.Id" style="color: #6255a5;">Clone</a></td>
+                        <td style="vertical-align: middle;text-align:center;">
+                            <div class="dropdown1">
+                                <img src="~/Content/img/front-images/dots.png" class="dots">
+                                <div class="dropdown-content1">
+                                    <a href="/UserActivity/Download/@item.sellernotedetail.Id">Download Note</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                            count++;
+                        }
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("MyRejected",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

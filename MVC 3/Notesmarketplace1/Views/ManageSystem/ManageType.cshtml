@@ -1,0 +1,125 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Notesmarketplace1.Models.NoteType>
+
+@{
+    ViewBag.Title = "ManageType";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section id="myprofile">
+    <div class="container-mp">
+        <h1>Manage Type</h1>
+        <div class="progressn">
+            <div class="section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/ManageSystem/AddType"><button id="button-add-type">ADD TYPE</button></a>
+                    </div>
+                    @using (Html.BeginForm("ManageType", "ManageSystem", FormMethod.Get))
+                    {
+                        <div class="col-md-6 ">
+                            <div class="btn-search">
+                                <input type="text" id="place-search" name="search" placeholder="   &#xF002;    Search">
+                                <button type="submit" id="button-search">SEARCH</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table border">
+                    <thead>
+                        <tr style="height: 75px; font-weight: 600;">
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">SR NO.</th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("TYPE", "ManageType", new { sortorder = ViewBag.nameparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("DESCRIPTION", "ManageType", new { sortorder = ViewBag.Descriptionparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("DATE ADDED", "ManageType", new { sortorder = ViewBag.AddedDateparam })
+                            </th>
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ADDEDBY", "ManageType", new { sortorder = ViewBag.Addedparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">
+                                @Html.ActionLink("ACTIVE", "ManageType", new { sortorder = ViewBag.Typeparam })
+                            </th>
+
+                            <th scope="col" style="vertical-align: middle;text-align:center;">ACTION</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    No any record found
+                                </td>
+                            </tr>
+                        }
+                        @{
+                            var count = 0;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+
+                    <tr class="table1">
+
+                        <td style="vertical-align: middle;text-align:center;">@(count + ((Model.PageNumber - 1) * Model.PageSize) + 1)</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.Name</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.Description</td>
+                        <td style="vertical-align: middle;text-align:center;">@item.CreatedDate</td>
+                        <td style="vertical-align: middle;text-align:center;">
+                            @item.User.NoteTypes.Where(x => x.CreatedBy == x.User.ID).Select(x => x.User.FirstName).FirstOrDefault()
+                                                @item.User.NoteTypes.Where(x => x.CreatedBy == x.User.ID).Select(x => x.User.LastName).FirstOrDefault()
+                                            </td>
+                        <td style="vertical-align: middle;text-align:center;">
+                            @if (@item.IsActive)
+                            {
+                                <p>Yes</p>
+                            }
+                            else
+                            {
+                                <p>No</p>
+                            }
+                        </td>
+                        <td style="vertical-align: middle;text-align:center;"><a href="/ManageSystem/AddType/@item.Id"><img src="~/Content/img/Dashboard/edit.png"></a><a href="/ManageSystem/DeleteType/@item.Id"><img src="~/Content/img/front-images/delete.png" onclick="return confirm('Are you sure you wants to make this Type inactive?');"></a></td>
+
+
+
+                    </tr>
+                            count++;
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="pagination">
+                <li>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("ManageType",
+                        new { page, sortorder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+               , new PagedListRenderOptions() { MaximumPageNumbersToDisplay = 5 })
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+</section>
+
